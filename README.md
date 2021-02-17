@@ -23,18 +23,18 @@ demo for codebootcamp2021
 -starts rock-paper-scissors game with custom buttons.
 
 
-## 
+**to make bot work, you must install pyTelegramBotAPI**
 ```
 pip install pyTelegramBotAPI
 
 ```
-then replace following variables with your api keys  
+**then replace following variables with your api keys**    
 bot_token = ~~config.YOUR_TELEGRAMBOT_API_TOKEN~~  
 newsapikey = ~~config.YOUR_NEWSAPI_KEY~~  
 apikey = ~~config.YOUR_OPENWEATHER_API_KEY~~  
 
 
-run with
+## run code with
 ```
 python app.py
 ```
