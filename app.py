@@ -4,12 +4,8 @@ from random import randint
 import json
 import requests
 import re
-from flask import Flask, request
 import config
-# POWERSHELL --> pip install pyTelegramBotAPI
-# botname --> olli6000bot
-# run code command --> python ollibot.py
-# change bot token to your own
+
 bot_token = config.YOUR_TELEGRAMBOT_API_TOKEN
 bot = telebot.TeleBot(token=bot_token)
 botname = bot.get_me().first_name
@@ -26,7 +22,7 @@ def send_help(message):
         message, 'you can use following commands: /hello, /game, /weather, /dog, /news')
 
 
-# start of random dog code
+# start of random dog code------------------------------
 dog_url = 'https://dog.ceo/api/breeds/image/random'
 dogresponse = requests.get(dog_url)
 
@@ -40,7 +36,7 @@ def send_dog(message):
         message, '{}'.format(dog))
 
 
-# start of news
+# start of news--------------------------
 newsapikey = config.YOUR_NEWSAPI_KEY
 news_url = ('http://newsapi.org/v2/top-headlines?'
             'country=us&'
@@ -59,7 +55,7 @@ def send_news(message):
         message, '{}\n {}'.format(ntitle, nimg))
 
 
-# weather code -------------------------
+# start of weather code -------------------------
 cityid = 'Kuopio'
 apikey = config.YOUR_OPENWEATHER_API_KEY
 weather_url = "http://api.openweathermap.org/data/2.5/weather?q={}&appid={}".format(
@@ -79,7 +75,7 @@ def send_weather(message):
         message, '{}\n {}°C\n {}'.format(location, temperature, description))
 
 
-# start of rps-game------------------------------------------
+# start of game ------------------------------------------
 
 t = ["rock", "paper", "scissors"]
 computer = t[randint(0, 2)]
