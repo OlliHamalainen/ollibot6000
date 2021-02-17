@@ -24,7 +24,7 @@ def send_hello(message):
 @ bot.message_handler(commands=['help'])
 def send_help(message):
     bot.reply_to(
-        message, 'you can use following commands: /hello, /game, /weather, /dog')
+        message, 'you can use following commands: /hello, /game, /weather, /dog, /news')
 
 
 # start of random dog code
