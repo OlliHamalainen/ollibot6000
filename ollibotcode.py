@@ -10,10 +10,6 @@ import os
 # botname --> olli6000bot
 # run code command --> python ollibot.py
 
-YOUR_TELEGRAMBOT_API_TOKEN = '1650853956:AAFnatrD9QzhJGlLfTrpXEJVqcDm-NNGDaw'
-YOUR_NEWSAPI_KEY = 'b59a95d9ceac43d58f631ac3530acf8f'
-YOUR_OPENWEATHER_API_KEY = 'bba5e1f9140917bb92d40ee417ca17b8'
-
 # change bot token to your own
 bot_token = YOUR_TELEGRAMBOT_API_TOKEN
 bot = telebot.TeleBot(token=bot_token)
