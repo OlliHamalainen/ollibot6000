@@ -5,7 +5,7 @@ from random import randint
 import requests
 import json
 import re
-
+import os
 # POWERSHELL --> pip install pyTelegramBotAPI
 # botname --> olli6000bot
 # run code command --> python ollibot.py
@@ -14,6 +14,9 @@ import re
 bot_token = config.YOUR_TELEGRAMBOT_API_TOKEN
 bot = telebot.TeleBot(token=bot_token)
 botname = bot.get_me().first_name
+
+PORT = int(os.environ.get('PORT', '8443'))
+updater = Updater(bot_token)
 
 
 @bot.message_handler(commands=['hello'])
@@ -149,4 +152,8 @@ def query_handler(call):
         call.message.chat.id, call.message.message_id)
 
 
-bot.polling()
+updater.start_webhook(listen="0.0.0.0",
+                      port=PORT,
+                      url_path=bot_token)
+updater.bot.set_webhook("https://ollibot6000.herokuapp.com/" + bot_token)
+updater.idle()
