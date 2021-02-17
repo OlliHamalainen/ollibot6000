@@ -1,7 +1,8 @@
 # ollibot6000 - Telegram bot made with python
+demo for codebootcamp2021
 
 
-##bot commands and what they do
+## bot commands and what they do
 
 `/help`
 -shows all following commands
@@ -22,7 +23,7 @@
 -starts rock-paper-scissors game with custom buttons.
 
 
-## things to do to make this work
+## 
 ```
 pip install pyTelegramBotAPI
 
