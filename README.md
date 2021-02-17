@@ -1,2 +1,11 @@
 # ollibot6000 - Telegram bot made with python
-telegram pythonbot
+
+## things to install
+```
+pip install pyTelegramBotAPI
+
+```
+## run with
+```
+python app.py
+```
