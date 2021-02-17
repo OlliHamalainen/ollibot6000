@@ -5,15 +5,12 @@ import json
 import requests
 import re
 from flask import Flask, request
-import os
+import config
 # POWERSHELL --> pip install pyTelegramBotAPI
 # botname --> olli6000bot
 # run code command --> python ollibot.py
-YOUR_TELEGRAMBOT_API_TOKEN = '1650853956:AAFnatrD9QzhJGlLfTrpXEJVqcDm-NNGDaw'
-YOUR_NEWSAPI_KEY = 'b59a95d9ceac43d58f631ac3530acf8f'
-YOUR_OPENWEATHER_API_KEY = 'bba5e1f9140917bb92d40ee417ca17b8'
 # change bot token to your own
-bot_token = YOUR_TELEGRAMBOT_API_TOKEN
+bot_token = config.YOUR_TELEGRAMBOT_API_TOKEN
 bot = telebot.TeleBot(token=bot_token)
 botname = bot.get_me().first_name
 
@@ -44,7 +41,7 @@ def send_dog(message):
 
 
 # start of news
-newsapikey = YOUR_NEWSAPI_KEY
+newsapikey = config.YOUR_NEWSAPI_KEY
 news_url = ('http://newsapi.org/v2/top-headlines?'
             'country=us&'
             'apiKey={}'.format(newsapikey))
@@ -64,7 +61,7 @@ def send_news(message):
 
 # weather code -------------------------
 cityid = 'Kuopio'
-apikey = YOUR_OPENWEATHER_API_KEY
+apikey = config.YOUR_OPENWEATHER_API_KEY
 weather_url = "http://api.openweathermap.org/data/2.5/weather?q={}&appid={}".format(
     cityid, apikey)
 
