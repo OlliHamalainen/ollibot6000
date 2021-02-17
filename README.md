@@ -28,10 +28,10 @@ demo for codebootcamp2021
 pip install pyTelegramBotAPI
 
 ```
-then replace following variables with your api keys
-*bot_token = ~~config.YOUR_TELEGRAMBOT_API_TOKEN~~
-*newsapikey = ~~config.YOUR_NEWSAPI_KEY~~
-*apikey = ~~config.YOUR_OPENWEATHER_API_KEY~~
+then replace following variables with your api keys  
+bot_token = ~~config.YOUR_TELEGRAMBOT_API_TOKEN~~  
+newsapikey = ~~config.YOUR_NEWSAPI_KEY~~  
+apikey = ~~config.YOUR_OPENWEATHER_API_KEY~~  
 
 
 run with
