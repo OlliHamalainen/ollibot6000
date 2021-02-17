@@ -10,12 +10,12 @@ import os
 # botname --> olli6000bot
 # run code command --> python ollibot.py
 YOUR_TELEGRAMBOT_API_TOKEN = '1650853956:AAFnatrD9QzhJGlLfTrpXEJVqcDm-NNGDaw'
-
+YOUR_NEWSAPI_KEY = 'b59a95d9ceac43d58f631ac3530acf8f'
+YOUR_OPENWEATHER_API_KEY = 'bba5e1f9140917bb92d40ee417ca17b8'
 # change bot token to your own
 bot_token = YOUR_TELEGRAMBOT_API_TOKEN
 bot = telebot.TeleBot(token=bot_token)
 botname = bot.get_me().first_name
-server = Flask(__name__)
 
 
 @bot.message_handler(commands=['hello'])
@@ -43,19 +43,112 @@ def send_dog(message):
         message, '{}'.format(dog))
 
 
-@server.route('/' + bot_token, methods=['POST'])
-def getMessage(message):
-    bot.process_new_updates([telebot.types.Update.de_json(
-        requests.stream.read().decode("utf-8"))])
-    return "!", 200
+# start of news
+newsapikey = YOUR_NEWSAPI_KEY
+news_url = ('http://newsapi.org/v2/top-headlines?'
+            'country=us&'
+            'apiKey={}'.format(newsapikey))
 
 
-@server.route("/")
-def webhook():
-    bot.remove_webhook()
-    bot.set_webhook(url='https://ollibot6000.herokuapp.com/' + bot_token)
-    return "!", 200
+@ bot.message_handler(commands=['news'])
+def send_news(message):
+    newsresponse = requests.get(news_url)
+    w = newsresponse.json()
+    nmain = w['articles']
+    ncontent = nmain[randint(0, 10)]
+    ntitle = ncontent['title']
+    nimg = ncontent['urlToImage']
+    bot.reply_to(
+        message, '{}\n {}'.format(ntitle, nimg))
 
 
-if __name__ == "_main_":
-    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
+# weather code -------------------------
+cityid = 'Kuopio'
+apikey = YOUR_OPENWEATHER_API_KEY
+weather_url = "http://api.openweathermap.org/data/2.5/weather?q={}&appid={}".format(
+    cityid, apikey)
+
+f = requests.get(weather_url)
+y = f.json()
+main = y['main']
+temperature = main['temp'] - 273.15
+location = y['name']
+description = y['weather'][0]['description']
+
+
+@ bot.message_handler(commands=['weather'])
+def send_weather(message):
+    bot.reply_to(
+        message, '{}\n {}°C\n {}'.format(location, temperature, description))
+
+
+# start of rps-game------------------------------------------
+
+t = ["rock", "paper", "scissors"]
+computer = t[randint(0, 2)]
+
+
+@bot.message_handler(commands=['game'])
+def start_message(message):
+    markup = telebot.types.InlineKeyboardMarkup()
+    markup.add(telebot.types.InlineKeyboardButton(
+        text='Rock', callback_data=3))
+    markup.add(telebot.types.InlineKeyboardButton(
+        text='Paper', callback_data=4))
+    markup.add(telebot.types.InlineKeyboardButton(
+        text='Scissors', callback_data=5))
+    bot.send_message(
+        message.chat.id, text="Let's play advanced rps-game", reply_markup=markup)
+
+
+@bot.callback_query_handler(func=lambda call: True)
+def query_handler(call):
+
+    bot.answer_callback_query(
+        callback_query_id=call.id, text='Answer accepted!')
+
+    if call.data == computer:
+        answer == 'Tie'
+
+    elif call.data == '3':
+        callback_data_string = 'rock'
+        if computer == 'rock':
+            answer = 'tie with your {} againts my {}'.format(
+                callback_data_string, computer)
+        elif computer == 'paper':
+            answer = 'I won! Your {} had no change against my {}'.format(
+                callback_data_string, computer)
+        elif computer == 'scissors':
+            answer = 'you won! your {} beat my {} with ease'.format(
+                callback_data_string, computer)
+
+    elif call.data == '4':
+        callback_data_string = 'paper'
+        if computer == 'paper':
+            answer = 'tie with your {} againts my {}'.format(
+                callback_data_string, computer)
+        elif computer == 'scissors':
+            answer = 'I won! Your {} had no change against my {}'.format(
+                callback_data_string, computer)
+        elif computer == 'rock':
+            answer = 'you won! your {} beat my {} with ease'.format(
+                callback_data_string, computer)
+
+    elif call.data == '5':
+        callback_data_string = 'scissors'
+        if computer == 'scissors':
+            answer = 'tie with your {} againts my {}'.format(
+                callback_data_string, computer)
+        elif computer == 'rock':
+            answer = 'I won! Your {} had no change against my {}'.format(
+                callback_data_string, computer)
+        elif computer == 'paper':
+            answer = 'you won! your {} beat my {} with ease'.format(
+                callback_data_string, computer)
+
+    bot.send_message(call.message.chat.id, answer)
+    bot.edit_message_reply_markup(
+        call.message.chat.id, call.message.message_id)
+
+
+bot.polling()
