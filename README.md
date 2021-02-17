@@ -6,19 +6,19 @@
 `/help`
 -shows all following commands
 
-**/hello**
+`/hello`
 -Greets user with "hi there, I'm ollibot6000"
     
-**/dog**
+`/dog`
 -Sends user a random dog image using https://dog.ceo/api/breeds/image/random
     
-**/news**
+`/news`
 -Sends user a headline and image using https://newsapi.org/
     
-**/weather**
+`/weather`
 -gives user information about weather in kuopio using https://openweathermap.org/api
     
-**/game**
+`/game`
 -starts rock-paper-scissors game with custom buttons.
 
 
