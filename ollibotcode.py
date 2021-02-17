@@ -27,7 +27,7 @@ def send_help(message):
         message, 'you can use following commands: /hello, /game, /weather, /dog')
 
 
-# start of random dog
+# start of random dog code
 dog_url = 'https://dog.ceo/api/breeds/image/random'
 dogresponse = requests.get(dog_url)
 
