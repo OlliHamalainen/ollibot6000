@@ -2,9 +2,9 @@ import telebot
 import time
 import config
 from random import randint
-import requests
 import json
 import re
+from flask import Flask, request
 import os
 # POWERSHELL --> pip install pyTelegramBotAPI
 # botname --> olli6000bot
@@ -14,6 +14,7 @@ import os
 bot_token = YOUR_TELEGRAMBOT_API_TOKEN
 bot = telebot.TeleBot(token=bot_token)
 botname = bot.get_me().first_name
+server = Flask(__name__)
 
 PORT = int(os.environ.get('PORT', '8443'))
 updater = Updater(bot_token)
@@ -152,8 +153,19 @@ def query_handler(call):
         call.message.chat.id, call.message.message_id)
 
 
-updater.start_webhook(listen="0.0.0.0",
-                      port=PORT,
-                      url_path=bot_token)
-updater.bot.set_webhook("https://ollibot6000.herokuapp.com/" + bot_token)
-updater.idle()
+@server.route('/' + bot_token, methods=['POST'])
+def getMessage(message):
+    bot.process_new_updates([telebot.types.Update.de_json(
+        requests.stream.read().decode("utf-8"))])
+    return "!", 200
+
+
+@server.route("/")
+def webhook():
+    bot.remove_webhook()
+    bot.set_webhook(url='https://ollibot6000.herokuapp.com/' + bot_token)
+    return "!", 200
+
+
+if __name__ == "_main_":
+    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
