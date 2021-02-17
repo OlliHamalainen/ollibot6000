@@ -7,6 +7,9 @@ import re
 import config
 
 bot_token = config.YOUR_TELEGRAMBOT_API_TOKEN
+newsapikey = config.YOUR_NEWSAPI_KEY
+apikey = config.YOUR_OPENWEATHER_API_KEY
+
 bot = telebot.TeleBot(token=bot_token)
 botname = bot.get_me().first_name
 
@@ -37,7 +40,7 @@ def send_dog(message):
 
 
 # start of news--------------------------
-newsapikey = config.YOUR_NEWSAPI_KEY
+
 news_url = ('http://newsapi.org/v2/top-headlines?'
             'country=us&'
             'apiKey={}'.format(newsapikey))
@@ -57,7 +60,6 @@ def send_news(message):
 
 # start of weather code -------------------------
 cityid = 'Kuopio'
-apikey = config.YOUR_OPENWEATHER_API_KEY
 weather_url = "http://api.openweathermap.org/data/2.5/weather?q={}&appid={}".format(
     cityid, apikey)
 
