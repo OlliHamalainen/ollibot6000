@@ -2,7 +2,8 @@
 
 
 ##bot commands and what they do
-**/help**
+
+`/help`
 -shows all following commands
 
 **/hello**
