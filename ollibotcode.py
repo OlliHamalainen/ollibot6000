@@ -26,8 +26,6 @@ def send_help(message):
     bot.reply_to(
         message, 'you can use following commands: /hello, /game, /weather, /dog')
 
-# start of typepart
-
 
 # start of random dog
 dog_url = 'https://dog.ceo/api/breeds/image/random'
