@@ -1,1 +1,1 @@
-web: python3 ollibotcode.py
+web: python3 app.py
