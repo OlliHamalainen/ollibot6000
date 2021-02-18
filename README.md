@@ -30,9 +30,9 @@ pip install pyTelegramBotAPI
 ```
 also update python to version 3.9  
 **then replace following variables with your api keys**    
-bot_token = ~~config.YOUR_TELEGRAMBOT_API_TOKEN~~  (key aquired from telegrams botfather)
-newsapikey = ~~config.YOUR_NEWSAPI_KEY~~  (https://newsapi.org/)
-apikey = ~~config.YOUR_OPENWEATHER_API_KEY~~  (https://openweathermap.org/api)
+bot_token = ~~config.YOUR_TELEGRAMBOT_API_TOKEN~~  (key aquired from telegrams botfather)  
+newsapikey = ~~config.YOUR_NEWSAPI_KEY~~  (https://newsapi.org/)  
+apikey = ~~config.YOUR_OPENWEATHER_API_KEY~~  (https://openweathermap.org/api)  
 
 
 ## run code with
